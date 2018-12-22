@@ -1,0 +1,17 @@
+# 跳转机, gateway_ip, port_number, yourname 需要填写， id_rsa为你的私钥文件
+Host gateway
+  HostName gateway_ip
+  Port port_number
+  User yourname
+  ProxyCommand none
+  IdentityFile ~/.ssh/id_rsa
+  PasswordAuthentication no
+
+# 任务机1, task1_ip, yourname, 需要填写
+Host task1
+  HostName task1_ip 
+  User yourname
+  ProxyCommand ssh -q -W %h:%p gateway
+  IdentityFile ~/.ssh/id_rsa
+  PasswordAuthentication no
+
