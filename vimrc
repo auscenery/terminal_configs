@@ -103,7 +103,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 
 "https://vimawesome.com/plugin/vim-go-sparks-fly
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 
 "https://vimawesome.com/plugin/youcompleteme, 代码补全
 "Plugin 'valloric/youcompleteme'
