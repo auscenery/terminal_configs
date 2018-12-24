@@ -89,8 +89,6 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#/bin/zsh ./iterm/change_bg.sh 
-
-#source ./machines.sh
+#/bin/zsh ~/.iterm/change_bg.sh 
+#source ~/.machines.sh
 
