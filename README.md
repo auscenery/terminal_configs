@@ -4,5 +4,6 @@
 ![vim 配置如下](images/1.png)
 ![zsh 配置如下](images/2.png)
 ![ssh 配置如下](images/3.png)
+![6个软链接的对应位置关系如下](images/4.png)
 ### config.tar.gz 主要包含有目录：oh-my-zsh, zsh, vim， 因为这三个项目都是github项目，打包是为了方便上传
 
