@@ -174,3 +174,7 @@ let g:snipMate.scope_aliases = {}
 "*********************************plugin config*******************************************
 
 set maxmempattern=20000 "vim 提示 E363: uses more memory than 'maxmempattern'?
+"设置状态行
+set ch=1
+set statusline=%F\ [%{&fenc}\ %{&ff}\ L%l/%L\ C%c]\ %=%{strftime('%Y-%m-%d\ %H:%M')}
+set laststatus=2
