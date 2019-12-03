@@ -1,41 +1,24 @@
-"set nocompatible
-set nocp  "关闭vi的一致性模式，避免以前版本的一些Bug和局限
-
-
-"开启语法高亮
-syntax enable
-syntax on 
-
+set nocompatible "关闭vi的一致性模式，避免以前版本的一些Bug和局限
+syntax enable "开启语法高亮
+syntax on
 filetype on " 检测文件类型
 filetype plugin on "开启插件，加载vim自带和插件相应的语法和文件类型相关脚本
 filetype indent on "针对不同的文件，采用不同的缩进方式
-
-"设置主题
 set background=dark
 colorscheme molokai
-"colorscheme solarized
+set nopaste "原样复制
 
-"设置粘贴模式
-set paste "原样复制
+set encoding=utf-8 " 设置编码
 
-" 设置编码
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
+set number "显示行号
+set relativenumber  "相对行数
 
-" 显示行号
-set number
-"相对行数
-set relativenumber
-
-" 高亮显示当前行/列
-set cursorline
+set cursorline "高亮显示当前行/列
 set cursorcolumn
 
-"搜索高亮显示
-set hlsearch
+set hlsearch "搜索高亮显示
+set incsearch
 
-" 缩进与tab空格数
 set autoindent "自动缩进
 set smarttab "让vim把连续数量的空格视为一个制表符
 set expandtab "将制表符扩展为空格
@@ -43,24 +26,21 @@ set tabstop=4 "设定 tab 长度为 4
 set shiftwidth=4 " 设定 << 和 >> 命令移动时的宽度为4
 set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
 
-" 鼠标
 set mouse=a "打开鼠标模式
-"set nonu "不需要复制行号
-"set selection=exclusive
-"set selectmode=mouse,key
+set nonu "不需要复制行号
+set selection=exclusive
+set selectmode=mouse,key
 
-set ignorecase " 设置搜索时忽略大小写
+set ignorecase " 设置搜索时忽略大小写set incsearch
+
 set smartcase  " 当搜索的时候尝试smart 
 
-"代码折叠
 set foldenable  " 允许折叠
-"标记折叠
 set foldmarker=//{{{,//}}} """通过zc 折叠代码，zo展开
 set fdm=marker
-"缩进折叠
+set nowrap  "设置不折行"
 "set foldmethod=indent  "或者set fdm=indent, 根据代码缩进进行折叠
 
-" Ignore file config
 set wildignore+=*DS_Store*
 
 set showcmd "在状态栏显示正在输入的命令
@@ -68,6 +48,42 @@ set showmode "左下角显示当前Vim模式
 set ruler " 显示当前行号和列号
 set showmatch " 设置代码匹配,包括括号匹配情况
 
+
+set ignorecase      "忽略大小写"
+set cursorline      "突出显示当前行"
+set cursorcolumn    "突出显示当前列"
+
+set maxmempattern=20000 "vim 提示 E363: uses more memory than 'maxmempattern'?
+"set ch=1
+"set statusline=%F\ [%{&fenc}\ %{&ff}\ L%l/%L\ C%c]\ %=%{strftime('%Y-%m-%d\ %H:%M')} "设置状态行
+set laststatus=2
+set t_Co=256 " 开启256色支持
+set wildmenu             " vim自身命名行模式智能补全
+set autowrite           " 设置自动保存
+set autoread            " 文件在vim之外修改过，自动重新读入
+set confirm             " 在处理未保存或只读文件的时候，弹出确认
+
+let mapleader = ","
+"快速打开.vimrc文件
+"快速使得.vimrc文件生效 <CR>为enter键
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR> 
+"代替esc键
+inoremap jk <ESC>
+"inoremap <esc> <nop>
+"括号内都删除, 比如dp, cp
+onoremap p i(
+
+" Fast saving
+nnoremap <silent><Leader>w :write<CR>
+vnoremap <silent><Leader>w <Esc>:write<CR>
+"inoremap ( ()<Esc>i
+"inoremap [ []<Esc>i
+"inoremap { {}<Esc>i
+"inoremap " ""<Esc>i
+"inoremap ' ''<Esc>i
+
+autocmd FileType python set breakindentopt=shift:4
 
 "*********************************plugin*******************************************
 
@@ -79,8 +95,8 @@ set showmatch " 设置代码匹配,包括括号匹配情况
 " 参考https://github.com/tpope/vim-pathogen
 "set rtp+=~/.vim/bundle/vim-pathogen
 "source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim "二选一，两种方法，set或者source
-"execute pathogen#infect()
-
+"execute
+"pathogen#infect()
 "vundle 管理插件
 " set the runtime path to include Vundle and initialize
 filetype off 
@@ -125,6 +141,27 @@ Plugin 'tpope/vim-fugitive'
 "https://vimawesome.com/plugin/surround-vim
 Plugin 'tpope/vim-surround'
 
+"http://github.com/davidhalter/jedi-vim
+Plugin 'davidhalter/jedi-vim'
+
+"https://vimawesome.com/plugin/powerline-red
+"Plugin 'powerline/powerline'
+"https://github.com/vim-airline/vim-airline (very good)， 生效
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+"https://vimawesome.com/plugin/indentline, 生效 
+Plugin 'yggdroot/indentline'
+
+"https://github.com/nathanaelkane/vim-indent-guides
+Plugin 'nathanaelkane/vim-indent-guides'
+
+"https://vimawesome.com/plugin/vim-autopep8 (生效)
+Plugin 'tell-k/vim-autopep8'
+
+"https://github.com/jiangmiao/auto-pairs(生效, 在nopaste设置下生效)
+Plugin 'jiangmiao/auto-pairs'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -132,7 +169,6 @@ filetype plugin indent on
 
 
 "*********************************plugin config*******************************************
-
 "NERDTree config
 map nd :NERDTree
 map nc :NERDTreeClose
@@ -173,10 +209,124 @@ let g:NERDToggleCheckAllLines = 1
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 
+"缩进指示线" intentline
+let g:indentLine_char='┆'
+let g:indentLine_enabled = 1
+
+"autopep8设置"
+let g:autopep8_disable_show_diff=1
+
+"airline
+let g:airline#extensions#tabline#enabled = 1    " buffers设置
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+"let g:airline#extensions#tabline#formatter = 'jsformatter'
+"let g:airline_statusline_ontop=1
+
+"autopep8
+let g:autopep8_on_save = 1
+let g:autopep8_max_line_length=79
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+
+"auto-pairs
+let g:AutoPairsFlyMode = 1
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"'}
+let g:AutoPairs['<']='>'
+let g:AutoPairsShortcutToggle = '<M-p>'
+let g:AutoPairsShortcutFastWrap = '<M-e>'
+let g:AutoPairsShortcutJump = '<M-n>'
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:AutoPairsMapCR = 1
+let g:AutoPairsMapBS = 1
+
+"vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 0
+" 从第二层开始可视化显示缩进
+let g:indent_guides_start_level=2
+" 色块宽度
+let g:indent_guides_guide_size=1
+
 "*********************************plugin config*******************************************
 
-set maxmempattern=20000 "vim 提示 E363: uses more memory than 'maxmempattern'?
-"设置状态行
-set ch=1
-set statusline=%F\ [%{&fenc}\ %{&ff}\ L%l/%L\ C%c]\ %=%{strftime('%Y-%m-%d\ %H:%M')}
-set laststatus=2
+""""""""""""""""""""""""""""""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
+"新建文件后，自动定位到文件末尾
+autocmd BufNewFile * normal G
+
+func! SetHeader()
+    call setline(1, "/*************************************************************************")
+    call setline(2, "\# File Name: ".expand("%"))
+    call setline(3, "\# Author: Chuanjian Liang")
+    call setline(4, "\# Mail: moolighty@yahoo.com")
+    call setline(5, "\# Created Time: ".strftime("%c"))
+    call setline(6, " ************************************************************************/")
+    call setline(7, "")
+endfunc
+
+func! SetScriptComment(lineno)
+    call setline(a:lineno, "\#########################################################################")
+    call setline(a:lineno + 1, "\# File Name: ".expand("%"))
+    call setline(a:lineno + 2, "\# Author: Chuanjian Liang")
+    call setline(a:lineno + 3, "\# Mail: moolighty@yahoo.com")
+    call setline(a:lineno + 4, "\# Created Time: ".strftime("%c"))
+    call setline(a:lineno + 5, "\#########################################################################")
+    call setline(a:lineno + 6, "")
+endfunc
+
+""定义函数SetTitle，自动插入文件头
+func! SetTitle()
+    "如果文件类型为.py文件
+    if &filetype == 'python'
+        call setline(1, "\#!/usr/bin/env python")
+        call setline(2, "# -*- coding:utf-8 -*-")
+        call setline(3, "")
+        call SetScriptComment(4)
+        call setline(5 + 6, "")
+        call setline(6 + 6, 'if __name__ == "__main__":')
+        call setline(7 + 6, '    print("hello world!")')
+    "如果文件类型为.sh文件
+    elseif &filetype == 'sh'
+        call setline(1, "\#!/usr/bin/env bash")
+        call setline(2, "")
+        call SetScriptComment(3)
+        call setline(4 + 6, 'echo "hello world!"')
+        call setline(5 + 6, "")
+    elseif &filetype == 'c'
+        call SetHeader()
+        call setline(8, "#include <stdio.h>")
+        call setline(9, "")
+        call setline(10, "int main(int argc, char *argv[])")
+        call setline(11, "{")
+        call setline(12, '    printf("Hello world!\n");')
+        call setline(13, "    return 0;")
+        call setline(14, "}")
+    elseif expand("%:e") == 'h'
+        call SetHeader()
+        call setline(8, "#ifndef __".toupper(expand("%:r"))."_H__")
+        call setline(9, "#define __".toupper(expand("%:r"))."_H__")
+        call setline(10, "")
+        call setline(11, "#endif")
+        call setline(12, "")
+    elseif &filetype == 'cpp'
+        call SetHeader()
+        call setline(8, "#include <iostream>")
+        call setline(9, "using namespace std;")
+        call setline(10, "")
+        call setline(11, "int main(int argc, char *argv[])")
+        call setline(12, "{")
+        call setline(13, '    cout << "Hello ,world!" << endl;')
+        call setline(14, "    return 0;")
+        call setline(15, "}")
+    elseif &filetype == 'java'
+        call SetHeader()
+        call setline(8, "public class ".expand("%:r")." {")
+        call setline(9,  "    public static void main(String[] args) {")
+        call setline(10, '         System.out.println("Hello World");')
+        call setline(11, "    }")
+        call setline(12, "}")
+    endif
+endfunc
+""""""""""""""""""""""""""""""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
