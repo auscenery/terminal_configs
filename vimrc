@@ -7,6 +7,9 @@ filetype on " 检测文件类型
 filetype plugin on "开启插件，加载vim自带和插件相应的语法和文件类型相关脚本
 filetype indent on "针对不同的文件，采用不同的缩进方式
 
+set backspace=2 "mac 独有的问题 http://cenalulu.github.io/linux/why-my-backspace-not-work-in-vim/
+"等价于 set backspace=indent,eol,start"
+
 set nopaste "原样复制
 
 set encoding=utf-8 " 设置编码
@@ -180,6 +183,9 @@ Plugin 'hdima/python-syntax'
 "16.supertab https://vimawesome.com/plugin/supertab, 超赞，生效了
 Plugin 'ervandew/supertab'
 
+"17.https://vimawesome.com/plugin/ctrlp-vim-red,快速查找,生效了，非常好用
+Plugin 'kien/ctrlp.vim'
+
 "https://vimawesome.com/plugin/syntastic， 提示各种语言语法错误
 "Plugin 'scrooloose/syntastic'
 
@@ -286,7 +292,7 @@ let g:jedi#usages_command = "<leader>u"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 "I don't want the docstring window to popup during completion
-"autocmd FileType python setlocal completeopt-=preview 
+autocmd FileType python setlocal completeopt-=preview 
 "let g:jedi#completions_enabled = 0
 
 "vim-colors-solarized插件
@@ -303,6 +309,13 @@ let python_highlight_all = 1
 "supertab
 let g:SuperTabRetainCompletionType = 2
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+
+"ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" 设置过滤不进行查找的后缀名
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'"
+
 "*********************************plugin config*******************************************
 
 """"""""""""""""""""""""""""""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
