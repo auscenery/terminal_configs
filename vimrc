@@ -63,6 +63,7 @@ set autowrite           " 设置自动保存
 set autoread            " 文件在vim之外修改过，自动重新读入
 set confirm             " 在处理未保存或只读文件的时候，弹出确认
 
+" map前缀 
 let mapleader = ","
 "快速打开.vimrc文件
 "快速使得.vimrc文件生效 <CR>为enter键
@@ -70,7 +71,8 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR> 
 "代替esc键
 inoremap jk <ESC>
-"inoremap <esc> <nop>
+inoremap kj <ESC>
+"inoremap <esc> <nop>, 会触发其他副作用，比如箭头方向移动乱码
 "括号内都删除, 比如dp, cp
 onoremap p i(
 
@@ -135,31 +137,34 @@ Plugin 'mattn/emmet-vim'
 "https://vimawesome.com/plugin/vim-colors-solarized-ours
 Plugin 'altercation/vim-colors-solarized'
 
-"https://vimawesome.com/plugin/fugitive-vim git 的包装
+"https://vimawesome.com/plugin/fugitive-vim git 的包装, 一个非常优秀的、集成了各种git操作的Vim插件
 Plugin 'tpope/vim-fugitive'
 
-"https://vimawesome.com/plugin/surround-vim
+"https://vimawesome.com/plugin/surround-vim, 生效, 非常有用
+"作用: 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 
-"http://github.com/davidhalter/jedi-vim
+"http://github.com/davidhalter/jedi-vim,生效, 非常有用, python代码智能提示
 Plugin 'davidhalter/jedi-vim'
 
 "https://vimawesome.com/plugin/powerline-red
 "Plugin 'powerline/powerline'
-"https://github.com/vim-airline/vim-airline (very good)， 生效
+"https://github.com/vim-airline/vim-airline (very good)，
+"生效，非常有用，状态栏
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-"https://vimawesome.com/plugin/indentline, 生效 
+"https://vimawesome.com/plugin/indentline, 生效,缩进指示 
 Plugin 'yggdroot/indentline'
 
-"https://github.com/nathanaelkane/vim-indent-guides
+"https://github.com/nathanaelkane/vim-indent-guides, 生效
 Plugin 'nathanaelkane/vim-indent-guides'
 
-"https://vimawesome.com/plugin/vim-autopep8 (生效)
+"https://vimawesome.com/plugin/vim-autopep8 (生效), python代码规范检查
 Plugin 'tell-k/vim-autopep8'
 
-"https://github.com/jiangmiao/auto-pairs(生效, 在nopaste设置下生效)
+"https://github.com/jiangmiao/auto-pairs(生效, 在nopaste设置下生效, 括号匹配)
 Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
@@ -241,11 +246,24 @@ let g:AutoPairsMapCR = 1
 let g:AutoPairsMapBS = 1
 
 "vim-indent-guides
-let g:indent_guides_enable_on_vim_startup = 0
-" 从第二层开始可视化显示缩进
+let g:indent_guides_enable_on_vim_startup = 0 "控制是否启用
+"从第二层开始可视化显示缩进
 let g:indent_guides_start_level=2
 " 色块宽度
 let g:indent_guides_guide_size=1
+
+"jedi-vim
+let g:jedi#use_tabs_not_buffers = 1 "You can make jedi-vim use tabs when going to a definition et
+let g:jedi#use_splits_not_buffers = "left" "If you are a person who likes to use VIM-splits, you might want to put this in your .vimrc:
+let g:jedi#show_call_signatures = "1"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+" let g:jedi#completions_enabled = 0
 
 "*********************************plugin config*******************************************
 
