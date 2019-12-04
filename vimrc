@@ -1,11 +1,12 @@
 set nocompatible "关闭vi的一致性模式，避免以前版本的一些Bug和局限
+
 syntax enable "开启语法高亮
 syntax on
+
 filetype on " 检测文件类型
 filetype plugin on "开启插件，加载vim自带和插件相应的语法和文件类型相关脚本
 filetype indent on "针对不同的文件，采用不同的缩进方式
-set background=dark
-colorscheme molokai
+
 set nopaste "原样复制
 
 set encoding=utf-8 " 设置编码
@@ -57,7 +58,6 @@ set maxmempattern=20000 "vim 提示 E363: uses more memory than 'maxmempattern'?
 "set ch=1
 "set statusline=%F\ [%{&fenc}\ %{&ff}\ L%l/%L\ C%c]\ %=%{strftime('%Y-%m-%d\ %H:%M')} "设置状态行
 set laststatus=2
-set t_Co=256 " 开启256色支持
 set wildmenu             " vim自身命名行模式智能补全
 set autowrite           " 设置自动保存
 set autoread            " 文件在vim之外修改过，自动重新读入
@@ -69,9 +69,15 @@ let mapleader = ","
 "快速使得.vimrc文件生效 <CR>为enter键
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR> 
+"恢复操作
+nnoremap <leader>u <c-r> 
+
 "代替esc键
 inoremap jk <ESC>
+inoremap JK <ESC>
+inoremap KJ <ESC>
 inoremap kj <ESC>
+
 "inoremap <esc> <nop>, 会触发其他副作用，比如箭头方向移动乱码
 "括号内都删除, 比如dp, cp
 onoremap p i(
@@ -105,67 +111,83 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
-"https://github.com/VundleVim/Vundle.vim
-Plugin 'VundleVim/Vundle.vim' "通过制定github的用户名/项目名即可，https://github.com/VundleVim/Vundle.vim#about
+"1.https://github.com/VundleVim/Vundle.vim
+Plugin 'VundleVim/Vundle.vim' "通过制定github的用户名/项目名即可，https://github.com/VundleVim/Vundle.vim#about, 生效
 " 常用的命令
 " :PluginList       - 列出所有已配置的插件
 " :PluginInstall     - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
 " :PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存
 " :PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件
 
-"https://github.com/scrooloose/nerdtree, 文件导航
+"2.https://github.com/scrooloose/nerdtree, 文件导航, 已经生效，非常好用
 Plugin 'scrooloose/nerdtree'
 
-"https://vimawesome.com/plugin/syntastic， 提示各种语言语法错误
-"Plugin 'scrooloose/syntastic'
+"3.https://vimawesome.com/plugin/the-nerd-commenter， 快速加上注释和去掉注释,
+"生效，非常好用
+"<leader>cc   加注释
+" <leader>cu   解开注释
+" <leader>c<space>  加上/解开注释, 智能判断
+" <leader>cy   先复制, 再注解(p可以进行黏贴)
+ Plugin 'scrooloose/nerdcommenter'
 
-"https://vimawesome.com/plugin/the-nerd-commenter， 快速加上注释和去掉注释
-Plugin 'scrooloose/nerdcommenter'
-
-"https://vimawesome.com/plugin/vim-go-sparks-fly
-"Plugin 'fatih/vim-go'
-
-"https://vimawesome.com/plugin/youcompleteme, 代码补全
-"Plugin 'valloric/youcompleteme'
-
-"https://vimawesome.com/plugin/vim-snippets
+"4.https://vimawesome.com/plugin/vim-snippets, 减少按键次数, 减轻记忆负担,非常强大，值得拥有，生效
+"大家在在编程的过程中不可避免的需要敲大量的重复的代码结构。而作为程序员，很重要的一个意识，就是要坚持实践 DRY 原则。
+"使用 snippets 类的插件，可以通过自定义代码片段的方式来提高效率。
 Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
 
-"https://vimawesome.com/plugin/emmet-vim
+"5.https://vimawesome.com/plugin/emmet-vim, 能大幅度提高前端开发效率的一个工具
 Plugin 'mattn/emmet-vim'
 
-"https://vimawesome.com/plugin/vim-colors-solarized-ours
+"6.https://vimawesome.com/plugin/vim-colors-solarized-ours, 现在最流行的 Vim
+"主题, 生效
 Plugin 'altercation/vim-colors-solarized'
 
-"https://vimawesome.com/plugin/fugitive-vim git 的包装, 一个非常优秀的、集成了各种git操作的Vim插件
+"7.https://vimawesome.com/plugin/fugitive-vim git 的包装，一个非常优秀的、
+"集成了各种git操作的Vim插件,生效
 Plugin 'tpope/vim-fugitive'
 
-"https://vimawesome.com/plugin/surround-vim, 生效, 非常有用
+"8.https://vimawesome.com/plugin/surround-vim, 生效, 非常有用
 "作用: 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 
-"http://github.com/davidhalter/jedi-vim,生效, 非常有用, python代码智能提示
+"9.http://github.com/davidhalter/jedi-vim,生效, 非常有用, python代码智能提示
 Plugin 'davidhalter/jedi-vim'
 
-"https://vimawesome.com/plugin/powerline-red
+"10.https://vimawesome.com/plugin/powerline-red
 "Plugin 'powerline/powerline'
 "https://github.com/vim-airline/vim-airline (very good)，
 "生效，非常有用，状态栏
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-"https://vimawesome.com/plugin/indentline, 生效,缩进指示 
+"11.https://vimawesome.com/plugin/indentline, 生效,缩进指示 
 Plugin 'yggdroot/indentline'
 
-"https://github.com/nathanaelkane/vim-indent-guides, 生效
+"12.https://github.com/nathanaelkane/vim-indent-guides, 生效
 Plugin 'nathanaelkane/vim-indent-guides'
 
-"https://vimawesome.com/plugin/vim-autopep8 (生效), python代码规范检查
+"13.https://vimawesome.com/plugin/vim-autopep8 (生效), python代码规范检查
 Plugin 'tell-k/vim-autopep8'
 
-"https://github.com/jiangmiao/auto-pairs(生效, 在nopaste设置下生效, 括号匹配)
+"14.https://github.com/jiangmiao/auto-pairs(生效, 在nopaste设置下生效, 括号匹配)
 Plugin 'jiangmiao/auto-pairs'
+
+"15.https://vimawesome.com/plugin/python-vim-red,生效
+Plugin 'hdima/python-syntax'
+
+"16.supertab https://vimawesome.com/plugin/supertab, 超赞，生效了
+Plugin 'ervandew/supertab'
+
+"https://vimawesome.com/plugin/syntastic， 提示各种语言语法错误
+"Plugin 'scrooloose/syntastic'
+
+"https://vimawesome.com/plugin/vim-go-sparks-fly
+"Plugin 'fatih/vim-go'
+
+"https://vimawesome.com/plugin/youcompleteme, 代码补全
+"Plugin 'valloric/youcompleteme'
 
 call vundle#end()
 filetype plugin indent on
@@ -259,12 +281,28 @@ let g:jedi#show_call_signatures = "1"
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
+let g:jedi#documentation_command = "<leader>o"
+let g:jedi#usages_command = "<leader>u"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
-" let g:jedi#completions_enabled = 0
+"I don't want the docstring window to popup during completion
+"autocmd FileType python setlocal completeopt-=preview 
+"let g:jedi#completions_enabled = 0
 
+"vim-colors-solarized插件
+"set background=dark
+set background=light
+set t_Co=256 " 开启256色支持
+colorscheme molokai
+"colorscheme solarized
+
+"python syntax
+let OPTION_NAME = 1
+let python_highlight_all = 1
+
+"supertab
+let g:SuperTabRetainCompletionType = 2
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 "*********************************plugin config*******************************************
 
 """"""""""""""""""""""""""""""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
