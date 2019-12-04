@@ -293,6 +293,7 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 "I don't want the docstring window to popup during completion
 autocmd FileType python setlocal completeopt-=preview 
+let g:jedi#popup_on_dot = 0
 "let g:jedi#completions_enabled = 0
 
 "vim-colors-solarized插件
