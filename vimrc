@@ -85,6 +85,16 @@ inoremap kj <ESC>
 "括号内都删除, 比如dp, cp
 onoremap p i(
 
+"fast close window
+nnoremap <silent><leader>q :quit<CR>
+vnoremap <silent><leader>q :quit<CR>
+
+"窗口切换, 参考http://cn.voidcc.com/question/p-zaioucxu-bev.html
+nnoremap <leader>n <C-w><C-w>
+nnoremap <leader>N <C-w><C-w>
+vnoremap <silent><leader>n <C-w><C-w>
+vnoremap <silent><leader>N <C-w><C-w>
+
 " Fast saving
 nnoremap <silent><Leader>w :write<CR>
 vnoremap <silent><Leader>w <Esc>:write<CR>
@@ -93,8 +103,6 @@ vnoremap <silent><Leader>w <Esc>:write<CR>
 "inoremap { {}<Esc>i
 "inoremap " ""<Esc>i
 "inoremap ' ''<Esc>i
-
-autocmd FileType python set breakindentopt=shift:4
 
 "*********************************plugin*******************************************
 
@@ -156,6 +164,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 
 "9.http://github.com/davidhalter/jedi-vim,生效, 非常有用, python代码智能提示
+" 需要安装jedi， pip install jedi
 Plugin 'davidhalter/jedi-vim'
 
 "10.https://vimawesome.com/plugin/powerline-red
@@ -185,6 +194,13 @@ Plugin 'ervandew/supertab'
 
 "17.https://vimawesome.com/plugin/ctrlp-vim-red,快速查找,生效了，非常好用
 Plugin 'kien/ctrlp.vim'
+
+"18 https://vimawesome.com/plugin/vim-flake8, python代码规范检查插件，
+"需要提前pip install flake8, 赞，超强，比autopep8好
+"lake8是集成了pyflakes和pycodestyle，其中，pyflakes检查代码错误；
+"pycodestyle检查代码是否遵循Python编码规范（PEP8），
+"其取代了pep8，后者已经不再更新. 该插件超棒
+Plugin 'nvie/vim-flake8'
 
 "https://vimawesome.com/plugin/syntastic， 提示各种语言语法错误
 "Plugin 'scrooloose/syntastic'
@@ -316,6 +332,24 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " 设置过滤不进行查找的后缀名
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'"
+
+"flake
+let g:flake8_error_marker='EE'     " set error marker to 'EE'
+let g:flake8_warning_marker='WW'   " set warning marker to 'WW'
+"let g:flake8_pyflake_marker=''     " disable PyFlakes warnings
+"let g:flake8_complexity_marker=''  " disable McCabe complexity warnings
+"let g:flake8_naming_marker=''      " disable naming warnings
+" to use colors defined in the colorscheme
+"highlight link Flake8_Error      Error
+"highlight link Flake8_Warning    WarningMsg
+"highlight link Flake8_Complexity WarningMsg
+"highlight link Flake8_Naming     WarningMsg
+"highlight link Flake8_PyFlake    WarningMsg
+let g:flake8_quickfix_height=20
+" autocmd FileType python set breakindentopt=shift:4
+autocmd FileType python map <buffer> <leader><leader>  :call flake8#Flake8()<CR>
+autocmd BufWritePost *.py call flake8#Flake8()
+
 
 "*********************************plugin config*******************************************
 
