@@ -80,6 +80,16 @@ inoremap jk <ESC>
 inoremap JK <ESC>
 inoremap KJ <ESC>
 inoremap kj <ESC>
+inoremap kj <ESC>
+
+"buffer切换
+nnoremap <leader>b <C-^>
+
+"行首， 行尾
+noremap <leader>h <S-^>
+noremap <leader>H <S-^>
+noremap <leader>t <S-$>
+noremap <leader>T <S-$>
 
 "inoremap <esc> <nop>, 会触发其他副作用，比如箭头方向移动乱码
 "括号内都删除, 比如dp, cp
@@ -348,7 +358,7 @@ let g:flake8_warning_marker='WW'   " set warning marker to 'WW'
 let g:flake8_quickfix_height=20
 " autocmd FileType python set breakindentopt=shift:4
 autocmd FileType python map <buffer> <leader><leader>  :call flake8#Flake8()<CR>
-autocmd BufWritePost *.py call flake8#Flake8()
+"autocmd BufWritePost *.py call flake8#Flake8()
 
 
 "*********************************plugin config*******************************************
