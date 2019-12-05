@@ -276,7 +276,7 @@ let g:airline#extensions#tabline#formatter = 'default'
 "autopep8
 let g:autopep8_on_save = 1
 let g:autopep8_max_line_length=79
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+autocmd FileType python noremap <buffer> <leader>c :call Autopep8()<CR>
 
 "auto-pairs
 let g:AutoPairsFlyMode = 1
